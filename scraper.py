@@ -3,15 +3,19 @@ import time
 
 rangeend = 9
 matrix = [[0]*(rangeend + 1) for i in range(rangeend + 1)]
-
-
 desiredratio = 1.2
 
-
-
+currencyNames = ["Reserved", "Alteration", "Fusing", "Alchemy", "Chaos", "Gemcutter", "Exalt", "Chromatic", "Jeweller", "Chance", "Chisel", "Scouring", "Blessed",
+    "Regret", "Regal", "Divine", "Vaal", "Wisdom", "Portal", "Armourer", "Whetstone", "Glassblowers", "Transmutation", "Augmentation", "Mirror", "Eternal", "Perandus",
+    "Silver", "Sacrafice at Dusk", "Sacrafice at Midnight", "Sacrafice at Dawn", "Sacrafice at Noon", "Mortal Grief", "Mortal Rage", "Mortal Hope", "Mortal Ignorance",
+    "Ebers", "Yriels", "Inya", "Volkuur", "Offering", "Fragment of the hydra", "phoenix", "Minotaur", "Chimera", "Apprentice Sextant", "Journeyman Sextant",
+    "Master Sextant", "Sacrifce Set", "Mortal Set", "Pale Court Set", "Shaper set", "Spliter of Xoph", "Splinter of Tul", "Splinter of Esh", "Splinter of Uul-Netol", "Splinter of Chayula", "Xoph",
+    "Blessing of Tul", "Blessing of Esh", "Blessing of Uul-Netol", "Blessing of Chayula", "Xophs Breechstone", "Tuls Breechstone", "Eshs Breechstone", "Uul-netol breechstone", "Chayula Breechstone"]
 
 br = webdriver.PhantomJS('phantomjs')
+
 br.get('http://currency.poe.trade/search?league=Breach&online=x&want=1-2-3-4-5-6-7-8&have=1-2-3-4-5-6-7-8')
+#br.get('http://currency.poe.trade/search?league=Breach&online=x&want=1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-35-27-28-29-30-31-32-33-34-36-37-38-39-40-41-42-43-44-45-46-47-48-49-50-51-52-53-54-55-56-57-58-59-60-61-62-63-64-65-66&have=1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-35-27-28-29-30-31-32-33-34-36-37-38-39-40-41-42-43-44-45-46-47-48-49-50-51-52-53-54-55-56-57-58-59-60-61-62-63-64-65-66')
 
 time.sleep(10)
 src = br.page_source
@@ -36,14 +40,16 @@ for i in range(1, rangeend):
 for i in range(1, rangeend):
     for j in range(1, i):
         if i != j:
-            if (matrix[i][j] * matrix[j][i]) > desiredratio:
-                print "Cycle of length 2 detected from " + str(i) + " to " + str(j) + " to " + str(i)
+            actualratio = (matrix[i][j] * matrix[j][i])
+            if  actualratio > desiredratio:
+                print "Cycle of length 2 R: " + str(actualratio) +  " detected from " + str(currencyNames[i]) + " to " + str(currencyNames[j]) + " to " + str(currencyNames[i])
     
 # Cycles of length 3
 for i in range(1, rangeend):
     for j in range(1, i):
         for k in range(1, j):
             if i != j and j != k and k != i:
-                if (matrix[i][j] * matrix[j][k] * matrix[k][i]) > desiredratio:
-                    print "Cycle of length 3 detected from " + str(i) + " to " + str(j) + " to " + str(k) + " to " + str(i)
+                actualratio = (matrix[i][j] * matrix[j][k] * matrix[k][i])
+                if  actualratio > desiredratio:
+                    print "Cycle of length 3 R: " + str(actualratio) + " detected from " + str(currencyNames[i]) + " to " + str(currencyNames[j]) + " to " + str(currencyNames[k]) + " to " + str(currencyNames[i])
 
