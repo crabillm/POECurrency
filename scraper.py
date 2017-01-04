@@ -1,9 +1,9 @@
 from selenium import webdriver
 import time
 
-rangeend = 9
+rangeend = 67
 matrix = [[0]*(rangeend + 1) for i in range(rangeend + 1)]
-desiredratio = 1.2
+desiredratio = 1.0
 
 currencyNames = ["Reserved", "Alteration", "Fusing", "Alchemy", "Chaos", "Gemcutter", "Exalt", "Chromatic", "Jeweller", "Chance", "Chisel", "Scouring", "Blessed",
     "Regret", "Regal", "Divine", "Vaal", "Wisdom", "Portal", "Armourer", "Whetstone", "Glassblowers", "Transmutation", "Augmentation", "Mirror", "Eternal", "Perandus",
@@ -14,8 +14,8 @@ currencyNames = ["Reserved", "Alteration", "Fusing", "Alchemy", "Chaos", "Gemcut
 
 br = webdriver.PhantomJS('phantomjs')
 
-br.get('http://currency.poe.trade/search?league=Breach&online=x&want=1-2-3-4-5-6-7-8&have=1-2-3-4-5-6-7-8')
-#br.get('http://currency.poe.trade/search?league=Breach&online=x&want=1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-35-27-28-29-30-31-32-33-34-36-37-38-39-40-41-42-43-44-45-46-47-48-49-50-51-52-53-54-55-56-57-58-59-60-61-62-63-64-65-66&have=1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-35-27-28-29-30-31-32-33-34-36-37-38-39-40-41-42-43-44-45-46-47-48-49-50-51-52-53-54-55-56-57-58-59-60-61-62-63-64-65-66')
+#br.get('http://currency.poe.trade/search?league=Breach&online=x&want=1-2-3-4-5-6-7-8&have=1-2-3-4-5-6-7-8')
+br.get('http://currency.poe.trade/search?league=Breach&online=x&want=1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-35-27-28-29-30-31-32-33-34-36-37-38-39-40-41-42-43-44-45-46-47-48-49-50-51-52-53-54-55-56-57-58-59-60-61-62-63-64-65-66&have=1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-35-27-28-29-30-31-32-33-34-36-37-38-39-40-41-42-43-44-45-46-47-48-49-50-51-52-53-54-55-56-57-58-59-60-61-62-63-64-65-66')
 
 time.sleep(10)
 src = br.page_source
@@ -33,8 +33,8 @@ for line in sep:
 			matrix[buytype][selltype] = float(float(sellamt)/float(buyamt))
 
 
-for i in range(1, rangeend):
-	print matrix[i][1:rangeend]
+#for i in range(1, rangeend):
+#	print matrix[i][1:rangeend]
 
 # Cycles of length 2
 for i in range(1, rangeend):
